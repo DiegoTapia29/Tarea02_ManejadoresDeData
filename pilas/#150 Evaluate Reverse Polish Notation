@@ -1,0 +1,31 @@
+# Complejidad Temporal: O(n)
+# Complejidad Espacial: O(n)
+# Justificación: Se recorre la lista de tokens de longitud n una sola vez mediante un 
+# bucle, lo que toma un tiempo O(n). Las operaciones de inserción y extracción 
+# en la pila toman un tiempo constante O(1). Por lo tanto, el tiempo total es O(n). 
+# La complejidad espacial es O(n) debido a que en el peor de los casos (cuando la mayoría 
+# son números), la pila almacenará todos los operandos hasta evaluar la expresión final.
+
+class Solution:
+    def evalRPN(self, tokens: list[str]) -> int:
+        pila = []
+        for token in tokens:
+            if token == "+":
+                b = pila.pop()
+                a = pila.pop()
+                pila.append(a + b)
+            elif token == "-":
+                b = pila.pop()
+                a = pila.pop()
+                pila.append(a - b)
+            elif token == "*":
+                b = pila.pop()
+                a = pila.pop()
+                pila.append(a * b)
+            elif token == "/":
+                b = pila.pop()
+                a = pila.pop()
+                pila.append(int(a / b))
+            else:
+                pila.append(int(token))
+        return pila[0]

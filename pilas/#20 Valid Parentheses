@@ -1,1 +1,20 @@
+# Complejidad Temporal: O(n)
+# Complejidad Espacial: O(n)
+# Justificación: Se recorre la cadena de texto de longitud n una sola vez mediante 
+# un bucle, lo que toma un tiempo O(n). Las operaciones de inserción y extracción 
+# en la pila toman un tiempo constante O(1). Por lo tanto, la complejidad temporal 
+# total es O(n). La complejidad espacial es O(n) en el peor de los casos, ya que si 
+# todos los caracteres son de apertura, se almacenarán todos en la pila.
 
+class Solution:
+    def isValid(self, s: str) -> bool:
+        pila = []
+        map = {")": "(", "}": "{", "]": "["}
+        for char in s:
+            if char in map:
+                tope = pila.pop () if pila else '#'
+                if map [char] != tope:
+                    return False
+            else:
+                pila.append(char)
+        return not pila 

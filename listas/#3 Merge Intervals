@@ -1,0 +1,21 @@
+# Complejidad Temporal: O(n log n)
+# Complejidad Espacial: O(n)
+# Justificación: El paso principal que domina el tiempo es ordenar los intervalos 
+# en función de su valor inicial, lo cual toma un tiempo O(n log n), donde n 
+# es la cantidad de intervalos. El recorrido posterior para fusionarlos toma un tiempo 
+# lineal O(n). Por lo tanto, el tiempo total es O(n log n). El espacio adicional es O(n) 
+# para almacenar la lista de intervalos fusionados resultante.
+
+class Solution:
+    def merge(self, intervalos: lista[lista[int]]) -> lista[lista[int]]:
+        if not intervalos:
+            return []
+        intervalos.sort(key=lambda x: x[0])
+        fusionados = [intervalos[0]]
+        for actual in intervalos[1:]:
+            ultimo_fusionado = fusionados[-1]
+            if actual[0] <= ultimo_fusionado[1]:
+                ultimo_fusionado[1] = max(ultimo_fusionado[1], actual[1])
+            else:
+                fusionados.append(actual)
+        return fusionados
