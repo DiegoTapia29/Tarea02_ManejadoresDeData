@@ -1,1 +1,16 @@
+# Complejidad Temporal: O(n)  
+# Complejidad Espacial: O(n)
+# Justificación: Se recorre la lista de entrada una sola vez mediante un ciclo 
+# que toma un tiempo O(n), donde n es la cantidad de elementos en 'nums'. 
+# Las operaciones de búsqueda y almacenamiento en el diccionario toman un tiempo promedio de O(1). 
+# Por lo tanto, el tiempo total es O(n). El espacio adicional es O(n) en el peor 
+# de los casos, ya que se guardan los elementos y sus índices en un diccionario.
 
+class Solution:
+    def twoSum(self, nums: lista[int], target: int) -> lista[int]:
+        dicc = {}
+        for i, num in enumerate(nums):
+            complemento = target - num
+            if complemento in dicc:
+                return [dicc[complemento], i]
+            dicc[num] = i
